@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novant Media | Turn Followers Into Customers</title>
+    <meta name="description" content="We are Novant Media, a social media agency helping local Indian businesses turn views into paying customers. We find the leads you're missing online.">
+    
+    <meta property="og:title" content="Novant Media | Turn Followers Into Customers">
+    <meta property="og:description" content="We help local Indian businesses turn views into paying customers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="[REPLACE_WITH_YOUR_DOMAIN]">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ----------------------------------------
+        1. Root Variables & Global Reset
+        ----------------------------------------
+        */
+        :root {
+            --primary-blue: #0B66FF;
+            --deep-blue: #063B8C;
+            --accent-blue: #7AA7FF;
+            --neutral-black: #0B0B0B;
+            --white: #FFFFFF;
+            --light-gray: #F3F6FB;
+            
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --header-height: 72px;
+            --border-radius: 8px;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s ease;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* Base font size */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--white);
+            color: var(--neutral-black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* NEW: Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            display: grid;
+            place-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .preloader-logo {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        body.loaded .preloader {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        /* END: Preloader Styles */
+        
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* ----------------------------------------
+        2. Utility & Reusable Components
+        ----------------------------------------
+        */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        section[id] {
+            scroll-margin-top: var(--header-height);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 3.75rem); /* Fluid typography */
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            max-width: 65ch;
+            color: #333;
+        }
+        
+        .section-intro {
+            text-align: center;
+            font-size: 1.15rem;
+            max-width: 70ch;
+            margin: 0 auto 4rem auto;
+            color: #444;
+        }
+        
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            color: var(--white);
+            background-image: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            background-size: 200% 100%;
+        }
+
+        .btn-primary:hover {
+            background-position: 100% 0;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(11, 102, 255, 0.3);
+        }
+
+        .btn-secondary {
+            color: var(--deep-blue);
+            background-color: var(--white);
+            border-color: #ddd;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-gray);
+            border-color: #ccc;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2px;
+            stroke: var(--primary-blue);
+        }
+
+        /* ----------------------------------------
+        3. Header & Navigation
+        ----------------------------------------
+        */
+        .main-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            height: var(--header-height);
+            transition: box-shadow var(--transition-speed);
+        }
+        
+        /* NEW: Added shadow on scroll */
+        .main-header.is-scrolled {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        /* UPDATED: Simplified Logo CSS */
+        #novant-logo {
+            height: 150px; /* Increased size slightly */
+            width: auto;
+            display: block;
+        }
+        
+        #novant-logo-text {
+            display: none; /* Hidden by default, only for fallback */
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--deep-blue);
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--neutral-black);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle .icon-menu,
+        .menu-toggle .icon-close {
+            width: 32px;
+            height: 32px;
+            stroke: var(--deep-blue);
+        }
+        
+        .menu-toggle .icon-close {
+            display: none;
+        }
+        
+        /* Mobile Menu State */
+        .nav-open .nav-links {
+            transform: translateX(0);
+        }
+        
+        .nav-open .menu-toggle .icon-menu {
+            display: none;
+        }
+        
+        .nav-open .menu-toggle .icon-close {
+            display: block;
+            stroke: var(--white); /* Close icon color on open menu */
+        }
+        
+        .nav-open .page-overlay {
+            display: block;
+            opacity: 1;
+        }
+
+        .page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 900;
+            display: none;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+
+        /* ----------------------------------------
+        4. Section: Hero (#home)
+        ----------------------------------------
+        */
+        #home {
+            min-height: calc(90vh - var(--header-height));
+            display: flex;
+            align-items: center;
+            padding-top: 3rem;
+            padding-bottom: 5rem;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        /* Staggered hero animations */
+        .hero-text {
+            --stagger-delay: 100ms;
+        }
+        .hero-text > * {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        h1 { animation-delay: var(--stagger-delay); }
+        .subheadline { animation-delay: calc(var(--stagger-delay) * 2); }
+        .hero-bullets { animation-delay: calc(var(--stagger-delay) * 3); }
+        .hero-cta { animation-delay: calc(var(--stagger-delay) * 4); }
+
+        
+        .hero-text .subheadline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 50ch;
+            margin-bottom: 2rem;
+        }
+
+        .hero-bullets {
+            margin: 2rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .hero-bullets li {
+            position: relative;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .hero-bullets li::before {
+            content: '✓'; /* Checkmark */
+            position: absolute;
+            left: -1.75rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .hero-visual {
+            display: none; /* Hidden on mobile */
+            position: relative;
+            height: 400px;
+        }
+
+   /* CSS-only abstract shapes */
+        .hero-visual::before,
+        .hero-visual::after {
+            content: '';
+            position: absolute;
+            border-radius: var(--border-radius);
+        }
+
+        .hero-visual::before {
+            width: 70%;
+            height: 80%;
+            right: 0;
+            top: 10%;
+            background: linear-gradient(45deg, var(--light-gray), #E0E8F9);
+            clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 80%);
+        }
+        
+        .hero-visual::after {
+            width: 40%;
+            height: 50%;
+            left: 5%;
+            top: 25%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            opacity: 0.8;
+            clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+            animation: float 4s ease-in-out infinite;
+        }
+
+
+        /* ----------------------------------------
+        5. Section: About Us (#about)
+        ----------------------------------------
+        */
+        #about {
+            background-color: var(--light-gray);
+        }
+        
+        .service-pillars {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .pillar {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all var(--transition-speed);
+        }
+        
+        .pillar:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .pillar .pillar-icon {
+            width: 48px;
+            height: 48px;
+            stroke: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .pillar h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .case-studies {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .case-study {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary-blue);
+            transition: all var(--transition-speed);
+        }
+        
+        .case-study:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .case-study .metric {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-study .metric-label {
+            font-weight: 600;
+            color: var(--neutral-black);
+            margin-bottom: 1rem;
+        }
+
+        /* ----------------------------------------
+        6. Section: Team (#team)
+        ----------------------------------------
+        */
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .team-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .team-avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--light-gray), var(--accent-blue));
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--deep-blue);
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .team-card h3 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .team-card .role {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .team-card .hook {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            min-height: 40px; /* Prevent layout jump */
+        }
+        
+        .team-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .team-socials a .icon {
+            width: 20px;
+            height: 20px;
+            stroke: #777;
+            transition: stroke var(--transition-speed);
+        }
+        
+        .team-socials a:hover .icon {
+            stroke: var(--primary-blue);
+        }
+        
+        /* Hidden bio for modal */
+        .team-bio {
+            display: none;
+        }
+        
+        /* ----------------------------------------
+        7. Section: Contact (#contact)
+        ----------------------------------------
+        */
+        #contact {
+            background-color: var(--deep-blue);
+        }
+        
+        #contact h2, #contact .section-intro {
+            color: var(--white);
+        }
+        
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--deep-blue);
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: all var(--transition-speed);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(11, 102, 255, 0.2);
+        }
+        
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .contact-form .btn-primary {
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info-item .icon {
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .contact-info-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--deep-blue);
+        }
+        
+        .contact-info-item p {
+            margin: 0;
+            line-height: 1.5;
+            word-break: break-word; /* Fix for long emails */
+        }
+        
+        .contact-info-item a {
+            color: var(--primary-blue);
+        }
+
+        /* ----------------------------------------
+        8. Footer
+        ----------------------------------------
+        */
+        .main-footer {
+            background-color: var(--neutral-black);
+            color: var(--light-gray);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-socials a .icon {
+            width: 28px;
+            height: 28px;
+            stroke: var(--light-gray);
+            transition: all 0.2s ease;
+        }
+        
+        .footer-socials a:hover .icon {
+            stroke: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        
+        .main-footer p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .main-footer a {
+            color: var(--accent-blue);
+        }
+
+        /* ----------------------------------------
+        9. Modals & Toasts
+        ----------------------------------------
+        */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            place-items: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-overlay.show {
+            display: grid;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: var(--shadow-md);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .modal-close-btn .icon {
+            width: 28px;
+            height: 28px;
+            stroke: #888;
+        }
+        
+        .modal-close-btn:hover .icon {
+            stroke: var(--neutral-black);
+        }
+        
+        .modal-body .role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body .bio {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #333;
+        }
+        
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, 150%);
+            background: var(--deep-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            z-index: 3000;
+            transition: transform 0.4s ease-in-out;
+            font-weight: 600;
+        }
+        
+        .toast-notification.show {
+            transform: translate(-50%, 0);
+        }
+
+        /* ----------------------------------------
+        10. Responsive Media Queries
+        ----------------------------------------
+        */
+        
+        /* Mobile (Default) */
+        @media (max-width: 767px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background-color: var(--deep-blue);
+                flex-direction: column;
+                padding: 5rem 2rem 2rem 2rem;
+                gap: 1.5rem;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links a {
+                color: var(--white);
+                font-size: 1.25rem;
+            }
+            
+            .nav-links a.active, .nav-links a:hover {
+                color: var(--accent-blue);
+            }
+            
+            .nav-links a::after {
+                background-color: var(--accent-blue);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+            
+            .contact-wrapper {
+                padding: 1.5rem;
+            }
+            
+            .team-grid {
+                 /* 1 column on mobile (default) */
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tablet */
+        @media (min-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1.2fr 0.8fr; /* 60/40 split */
+            }
+            
+            .hero-visual {
+                display: block;
+            }
+            
+            .service-pillars {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .case-studies {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                /* 2 columns on tablet */
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-wrapper {
+                grid-template-columns: 1.5fr 1fr;
+                padding: 3rem;
+            }
+        }
+        
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .team-grid {
+                 /* 3 columns on desktop */
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* NEW: 5-Column layout for team on large desktops */
+        @media (min-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            
+            .team-card .hook {
+                min-height: 60px; /* Taller min-height for 5 columns */
+            }
+        }
+
+        /* ----------------------------------------
+        11. Animations
+        ----------------------------------------
+        */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <img src="./novant-logo.jpg" alt="Novant Media Logo" class="preloader-logo">
+    </div>
+
+    <svg width="0" height="0" style="display:none;">
+        <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></symbol>
+        <symbol id="icon-growth" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></symbol>
+        <symbol id="icon-content" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></symbol>
+        <symbol id="icon-ads" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></symbol>
+        <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></symbol>
+        <symbol id="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+    </svg>
+
+    <div class="page-overlay" id="page-overlay"></div>
+
+    <header class="main-header" id="main-header">
+        <nav class="container">
+            <a href="#home" class="logo-link" aria-label="Novant Media Home">
+                <img src="./novant-logo.jpg" alt="Novant Media Logo" id="novant-logo">
+                <span id="novant-logo-text">Novant Media</span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-controls="nav-links-list" aria-expanded="false" aria-label="Toggle navigation menu">
+                <svg class="icon-menu"><use href="#icon-menu"></use></svg>
+                <svg class="icon-close"><use href="#icon-close"></use></svg>
+            </button>
+            
+            <ul class="nav-links" id="nav-links-list">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#team">Know the Team</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="home">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Turn Followers Into Customers.</h1>
+                    <p class="subheadline">We are Novant Media, a social media agency helping local Indian businesses turn views into paying customers. We find the leads you're missing online.</p>
+                    
+                    <ul class="hero-bullets">
+                        <li>Data-Driven Strategy & Analysis</li>
+                        <li>Full Content & Video Production</li>
+                        <li>Complete Social Media Management</li>
+                    </ul>
+                    
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary">Work With Us</a>
+                        <a href="#about" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Our Story</h2>
+                <p class="section-intro">
+                     In India, most local businesses don't have a social media page, so they miss out on hundreds of leads. We started Novant Media to fix this. We are two founders who are serious about helping you get disciplined, sustainable growth.
+                </p>
+
+                <div class="service-pillars">
+                    <div class="pillar">
+                        <svg class="pillar-icon"><use href="#icon-growth"></use></svg>
+                        <h3>Data-Driven Strategy</h3>
+                        <p>We analyze your brand, build a custom plan (AIDA, SWOT), and optimize hashtags & timing to find your perfect audience.</p>
+                    </div>
+                    <div class="pillar">
+                        <svg class="pillar-icon"><use href="#icon-content"></use></svg>
+                        <h3>Content & Video Production</h3>
+                        <p>Our team handles everything: recording, editing, and writing scroll-stopping posts, ads, and videos that get results.</p>
+                    </div>
+                    <div class="pillar">
+                        <svg class="pillar-icon"><use href="#icon-ads"></use></svg>
+                        <h3>Full Social Management</h3>
+                        <p>We manage your entire page, run engagement systems, and deliver monthly reports so you can focus on your business.</p>
+                    </div>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 4rem 0;">
+
+                </div>
+        </section>
+        
+        <section id="team">
+            <div class="container">
+                <h2>Meet the Growth Experts</h2>
+                <p class="section-intro">
+                    Meet the minds behind Novant Media. We're a team of founders and experts dedicated to your growth.
+                </p>
+                
+                <div class="team-grid">
+                    <div class="team-card" role="button" tabindex="0" aria-haspopup="dialog" data-member="raghav">
+                        <div class="team-avatar-placeholder">R</div>
+                        <h3>Raghav</h3>
+                        <p class="role">Founder</p>
+                        <p class="hook">"Lead Visionary"</p>
+                        <div class="team-socials">
+                            <a href="https://www.instagram.com/raghavneedscash/" aria-label="Raghav's Instagram" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-instagram"></use></svg></a>
+                        </div>
+                        <div class="team-bio" id="bio-raghav">
+                            Raghav is a 17-year-old entrepreneur who always felt more drawn to building things than to traditional academics. Growing up with a mother who is a professor, it was almost ironic—he lived in a home that valued education deeply, yet he never connected with studies the way he connected with ideas. What inspired him was not textbooks, but the thought of creating something meaningful.
+
+                            From a young age, he believed that real change happens when someone decides to solve a problem instead of waiting for others to do it. That mindset led him to start his agency on 1 November 2025 with one clear purpose: to help hidden and hardworking brands get the visibility they deserve. He saw that many great businesses stay unnoticed not because they lack quality, but because no one knows their story.
+
+                            Being underestimated for his age only pushed him harder. He made a quiet promise to himself that he would build something impactful before turning 18—something that proved passion can be stronger than expectations.
+
+                            Today, his vision is focused and ambitious:
+                            to grow across India and become one of the top social media agencies built on honesty, results, and genuine care for clients.
+
+                            For Raghav, this agency is not just a project.
+                            It is the start of a lifelong mission to bring deserving brands into the spotlight.
+                        </div>
+                    </div>
+
+                    <div class="team-card" role="button" tabindex="0" aria-haspopup="dialog" data-member="vedant">
+                        <div class="team-avatar-placeholder">V</div>
+                        <h3>Vedant</h3>
+                        <p class="role">Co-Founder</p>
+                        <p class="hook">"Cool Head"</p>
+                        <div class="team-socials">
+                            <a href="https://www.instagram.com/vedant.fm/" aria-label="Vedant's Instagram" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-instagram"></use></svg></a>
+                        </div>
+                        <div class="team-bio" id="bio-vedant">
+                        Vedant is the Co-Founder of Novant Media, where he drives the company’s vision and oversees key operations. Focused on strategy and growth, he works closely with the team to execute projects, streamline processes, and ensure the agency delivers impactful results.
+                        </div>
+                    </div>
+
+                    <div class="team-card" role="button" tabindex="0" aria-haspopup="dialog" data-member="eklaavya">
+                        <div class="team-avatar-placeholder">E</div>
+                        <h3>Eklavya</h3>
+                        <p class="role">CEO</p>
+                        <p class="hook">"Working towards a solid plan."</p>
+                        <div class="team-socials">
+                            <a href="https://www.instagram.com/eklaavvya/" aria-label="Eklavya's Instagram" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-instagram"></use></svg></a>
+                        </div>
+                        <div class="team-bio" id="bio-eklaavya">
+                            As CEO, Eklavya manages & structures all the plans for no delays ensuring that the work gets done as expected with no errors. He makes sure no flaws come in the way of success of any work in the Agency.
+                        </div>
+                    </div>
+                    
+                    <div class="team-card" role="button" tabindex="0" aria-haspopup="dialog" data-member="asad">
+                        <div class="team-avatar-placeholder">A</div>
+                        <h3>Asad</h3>
+                        <p class="role">CEO</p>
+                        <p class="hook">"Managing relations for better results."</p>
+                        <div class="team-socials">
+                            <a href="https://www.instagram.com/_asadansari_/" aria-label="Asad's Instagram" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-instagram"></use></svg></a>
+                        </div>
+                        <div class="team-bio" id="bio-asad">
+                            Asad is our second CEO. As CEO, he manages our business2client relationships, oversees client demands, and works to build a better relation between our clients.
+                        </div>
+                    </div>
+                    
+                    <div class="team-card" role="button" tabindex="0" aria-haspopup="dialog" data-member="ayush">
+                        <div class="team-avatar-placeholder">A</div>
+                        <h3>Ayush</h3>
+                        <p class="role">Head of Management</p>
+                        <p class="hook">"Making sure everything is in place."</p>
+                        <div class="team-socials">
+                            <a href="https://www.instagram.com/a4yuusshh/" aria-label="Ayush's Instagram" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-instagram"></use></svg></a>
+                        </div>
+                        <div class="team-bio" id="bio-ayush">
+                            Aayush Shewale is the Head of Management at Novant Media, where he oversees the company’s staff operations and promotional teams. Known for his strategic approach and leadership, he ensures smooth coordination across departments and provides direct support to the founder in executing key projects and organizational initiatives.
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="container">
+                <h2>Let's Build Together</h2>
+                <p class="section-intro">
+                    Ready to scale? Fill out the form below or email us directly. We'll get back to you within one business day.
+                </p>
+                
+                <div class="contact-wrapper">
+                    <form id="contact-form" action="#" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company Name & Website</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">What's your estimated monthly budget?</label>
+                            <select id="budget" name="budget">
+                                <option value="">Please select</option>
+                                <option value="<5k">&lt; ₹5,000</option>
+                                <option value="5k-10k">₹5,000 - ₹10,000</option>
+                                <option value="10k-15k">₹10,000 - ₹15,000</option>
+                                <option value="15k+">₹15,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">How can we help?</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                    
+                    <div class="contact-info">
+                        <h3>Contact Details</h3>
+                        <div class="contact-info-item">
+                            <svg class="icon"><use href="#icon-mail"></use></svg>
+                            <div>
+                                <strong>Email Us</strong>
+                                <p><a href="mailto:novantmedia@gmail.com">novantmedia@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="icon"><use href="#icon-phone"></use></svg>
+                            <div>
+                                <strong>Call Us</strong>
+                                <p><a href="tel:Vedant">9022866689</a></p>
+                                <p><a href="tel:Raghav">9112662012</a></p>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/novant_media/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-instagram"></use></svg></a>
+        
+            <p>&copy; 2025 Novant Media. All rights reserved.</p>
+            <p> Made with ❤️ by Vedant.</p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="team-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="modal-close" aria-label="Close modal">
+                <svg class="icon"><use href="#icon-close"></use></svg>
+            </button>
+            <div class="modal-body">
+                <h3 id="modal-title">[Team Member Name]</h3>
+                <p class="role" id="modal-role">[Team Member Role]</p>
+                <p class="bio" id="modal-bio">[Team Member Bio]</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast-notification" id="toast-notification" role="status">
+        Message sent successfully!
+    </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+/*
+        ========================================
+        NEW: Preloader
+        ========================================
+        */
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', () => {
+            
+            // --- THIS IS THE LINE TO CHANGE ---
+            // Set how long the loading screen stays visible (in milliseconds)
+            const loadingScreenTime = 2000; // 1000 = 1 second
+            // ------------------------------------
+
+            // This should match your CSS fade-out time
+            const fadeOutTime = 500; // 0.5s
+
+            // 1. Wait for the time you set
+            setTimeout(() => {
+                // 2. Add the 'loaded' class to start the fade-out
+                document.body.classList.add('loaded');
+                
+                // 3. Remove the element from the code *after* the fade-out finishes
+                setTimeout(() => {
+                    if (preloader) {
+                        preloader.remove();
+                    }
+                }, fadeOutTime); // Remove after 0.5s fade-out
+                
+            }, loadingScreenTime); // Wait 2 seconds before starting
+        });
+        /*
+        ========================================
+        NEW: Logo Fallback
+        ========================================
+        */
+        const logoImg = document.getElementById('novant-logo');
+        const logoText = document.getElementById('novant-logo-text');
+        
+        if (logoImg) {
+            logoImg.onerror = () => {
+                logoImg.style.display = 'none';
+                if (logoText) {
+                    logoText.style.display = 'block';
+                }
+            };
+            // If src is loaded, hide text
+            logoImg.onload = () => {
+                 if (logoText) {
+                    logoText.style.display = 'none';
+                }
+            }
+        }
+
+        /*
+        ========================================
+        1. Mobile Navigation
+        ========================================
+        */
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinksList = document.getElementById('nav-links-list');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const header = document.getElementById('main-header'); // Fixed selector
+        const pageOverlay = document.getElementById('page-overlay');
+
+        const toggleMenu = () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            document.body.classList.toggle('nav-open');
+        };
+
+        menuToggle.addEventListener('click', toggleMenu);
+        pageOverlay.addEventListener('click', toggleMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (document.body.classList.contains('nav-open')) {
+                    toggleMenu();
+                }
+            });
+        });
+        
+        /*
+        ========================================
+        NEW: Sticky Header Shadow
+        ========================================
+        */
+        const handleScroll = () => {
+            if (header && window.scrollY > 10) {
+                header.classList.add('is-scrolled');
+            } else if (header) {
+                header.classList.remove('is-scrolled');
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Run on load
+
+
+        /*
+        ========================================
+        3. Scrollspy (Active Nav Link)
+        ========================================
+        */
+        const sections = document.querySelectorAll('section[id]');
+        const headerHeight = getComputedStyle(document.documentElement).getPropertyValue('--header-height').trim() || '72px';
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: `-${headerHeight} 0px -40% 0px`, // Offset for header and trigger partway
+            threshold: 0
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-links a.active').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if (navLink) {
+                        navLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+        
+        /*
+        ========================================
+        4. Team Modal
+        ========================================
+        */
+        const teamCards = document.querySelectorAll('.team-card');
+        const modal = document.getElementById('team-modal');
+        const modalCloseBtn = document.getElementById('modal-close');
+        const modalTitle = document.getElementById('modal-title');
+        const modalRole = document.getElementById('modal-role');
+        const modalBio = document.getElementById('modal-bio');
+        
+        let elementToFocusOnClose = null; // For accessibility
+
+        const openModal = (e) => {
+            elementToFocusOnClose = document.activeElement;
+            const card = e.currentTarget;
+            const memberId = card.dataset.member;
+            
+            const name = card.querySelector('h3').textContent;
+            const role = card.querySelector('.role').textContent;
+            const bio = document.getElementById(`bio-${memberId}`).innerHTML;
+
+            modalTitle.textContent = name;
+            modalRole.textContent = role;
+            modalBio.innerHTML = bio;
+            
+            modal.classList.add('show');
+            document.body.classList.add('modal-open');
+            
+            modalCloseBtn.focus(); // Focus the close button for accessibility
+        };
+        
+        const closeModal = () => {
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            if (elementToFocusOnClose) {
+                elementToFocusOnClose.focus(); // Return focus to the card
+            }
+        };
+
+        teamCards.forEach(card => {
+            card.addEventListener('click', openModal);
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal(e);
+                }
+            });
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+
+        /*
+        ========================================
+        5. Contact Form & Toast Notification (Discord Webhook)
+        ========================================
+        */
+        const contactForm = document.getElementById('contact-form');
+        const toast = document.getElementById('toast-notification');
+
+        const showToast = (message, isError = false) => {
+            toast.textContent = message;
+            toast.style.backgroundColor = isError ? '#D93025' : 'var(--deep-blue)'; 
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.style.backgroundColor = 'var(--deep-blue)';
+            }, 4000);
+        };
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            if (!contactForm.checkValidity()) {
+                showToast('Please fill out all required fields.', true);
+                return;
+            }
+
+            // === USER: PASTE YOUR WEBHOOK URL HERE ===
+            const WEBHOOK_URL = "https://discord.com/api/webhooks/1437508259287404769/szEGje_eUrrp0L0KA5G4LjL3u-CB7o4whDZYS_SUUoY4n7CcSvribsO-9xfL3rRAC12Y";
+            // ==========================================
+            
+            if (WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
+               showToast("Developer error: Webhook URL is not set.", true);
+               return;
+            }
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+
+            const discordPayload = {
+                username: "Novant Media Lead Bot",
+                avatar_url: "https://i.imgur.com/gLAA9Eu.jpeg", // I've re-hosted your logo on a public URL for the bot avatar
+                content: `🎉 New Lead from ${data.name}!`,
+                embeds: [
+                    {
+                        title: "New Contact Form Submission",
+                        color: 747135, // Decimal for #0B66FF
+                        fields: [
+                            { name: "Name", value: data.name, inline: true },
+                            { name: "Email", value: `[${data.email}](mailto:${data.email})`, inline: true },
+                            { name: "Company", value: data.company || "Not provided", inline: false },
+                            { name: "Budget", value: data.budget || "Not selected", inline: true },
+                            { name: "Message", value: data.message, inline: false }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(discordPayload),
+                });
+
+                if (response.ok) {
+                    showToast('Message sent successfully!');
+                    contactForm.reset();
+                } else {
+                    showToast('Error sending message. Please try again.', true);
+                    console.error('Discord API Error:', await response.json());
+                }
+            } catch (error) {
+                showToast('Network error. Please check your connection.', true);
+                console.error('Fetch Error:', error);
+            }
+        });
+        
+    });
+</script>
+</body>
+</html>
