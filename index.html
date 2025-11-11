@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
+<style>
         /* ----------------------------------------
         1. Root Variables & Global Reset
         ----------------------------------------
@@ -55,6 +55,10 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            
+            /* --- MOBILE FIX #1 --- */
+            /* This forcibly prevents horizontal scrolling on all devices */
+            overflow-x: hidden;
         }
         
         /* NEW: Preloader Styles */
@@ -75,7 +79,7 @@
         
         .preloader-logo {
             width: 100%;
-            max-width: 450px;
+            max-width: 350px; /* You changed this */
             height: auto;
             animation: pulse 1.5s ease-in-out infinite;
         }
@@ -111,6 +115,9 @@
 
         section {
             padding: 5rem 0;
+            /* --- MOBILE FIX #2 --- */
+            /* Ensures sections don't cause overflow */
+            overflow-x: hidden; 
         }
 
         section[id] {
@@ -232,7 +239,6 @@
             transition: box-shadow var(--transition-speed);
         }
         
-        /* NEW: Added shadow on scroll */
         .main-header.is-scrolled {
             box-shadow: var(--shadow-sm);
         }
@@ -250,15 +256,14 @@
             text-decoration: none;
         }
         
-        /* UPDATED: Simplified Logo CSS */
         #novant-logo {
-            height: 150px; /* Increased size slightly */
+            height: 150px; 
             width: auto;
             display: block;
         }
         
         #novant-logo-text {
-            display: none; /* Hidden by default, only for fallback */
+            display: none; 
             font-weight: 700;
             font-size: 1.5rem;
             color: var(--deep-blue);
@@ -301,7 +306,7 @@
         }
 
         .menu-toggle {
-            display: none; /* Hidden on desktop */
+            display: none; 
             background: none;
             border: none;
             cursor: pointer;
@@ -330,7 +335,7 @@
         
         .nav-open .menu-toggle .icon-close {
             display: block;
-            stroke: var(--white); /* Close icon color on open menu */
+            stroke: var(--white); 
         }
         
         .nav-open .page-overlay {
@@ -371,7 +376,6 @@
             gap: 3rem;
         }
         
-        /* Staggered hero animations */
         .hero-text {
             --stagger-delay: 100ms;
         }
@@ -406,7 +410,7 @@
         }
 
         .hero-bullets li::before {
-            content: '✓'; /* Checkmark */
+            content: '✓'; 
             position: absolute;
             left: -1.75rem;
             color: var(--primary-blue);
@@ -420,17 +424,17 @@
         }
 
         .hero-visual {
-            display: none; /* Hidden on mobile */
+            display: none; 
             position: relative;
             height: 400px;
         }
 
-   /* CSS-only abstract shapes */
         .hero-visual::before,
         .hero-visual::after {
             content: '';
             position: absolute;
             border-radius: var(--border-radius);
+            animation: fadeIn 0.6s ease-out forwards;
         }
 
         .hero-visual::before {
@@ -440,6 +444,7 @@
             top: 10%;
             background: linear-gradient(45deg, var(--light-gray), #E0E8F9);
             clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 80%);
+            animation-delay: calc(var(--stagger-delay) * 5);
         }
         
         .hero-visual::after {
@@ -448,11 +453,11 @@
             left: 5%;
             top: 25%;
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
-            opacity: 0.8;
+            opacity: 0;
             clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
-            animation: float 4s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite, fadeIn 0.6s ease-out forwards;
+            animation-delay: calc(var(--stagger-delay) * 6), calc(var(--stagger-delay) * 6);
         }
-
 
         /* ----------------------------------------
         5. Section: About Us (#about)
@@ -585,7 +590,7 @@
             font-style: italic;
             color: #555;
             margin-bottom: 1.5rem;
-            min-height: 40px; /* Prevent layout jump */
+            min-height: 40px; 
         }
         
         .team-socials {
@@ -605,7 +610,6 @@
             stroke: var(--primary-blue);
         }
         
-        /* Hidden bio for modal */
         .team-bio {
             display: none;
         }
@@ -697,7 +701,7 @@
         .contact-info-item p {
             margin: 0;
             line-height: 1.5;
-            word-break: break-word; /* Fix for long emails */
+            word-break: break-word; 
         }
         
         .contact-info-item a {
@@ -844,6 +848,15 @@
         
         /* Mobile (Default) */
         @media (max-width: 767px) {
+            
+            /* --- MOBILE FIX #3 --- */
+            /* Let hero content flow naturally on mobile */
+            #home {
+                min-height: auto;
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+        
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -882,7 +895,6 @@
             }
             
             .team-grid {
-                 /* 1 column on mobile (default) */
                 grid-template-columns: 1fr;
             }
         }
@@ -890,7 +902,7 @@
         /* Tablet */
         @media (min-width: 768px) {
             .hero-content {
-                grid-template-columns: 1.2fr 0.8fr; /* 60/40 split */
+                grid-template-columns: 1.2fr 0.8fr; 
             }
             
             .hero-visual {
@@ -906,7 +918,6 @@
             }
             
             .team-grid {
-                /* 2 columns on tablet */
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -919,19 +930,18 @@
         /* Desktop */
         @media (min-width: 1024px) {
             .team-grid {
-                 /* 3 columns on desktop */
                 grid-template-columns: repeat(3, 1fr);
             }
         }
         
-        /* NEW: 5-Column layout for team on large desktops */
+        /* 5-Column layout for team on large desktops */
         @media (min-width: 1200px) {
             .team-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
             
             .team-card .hook {
-                min-height: 60px; /* Taller min-height for 5 columns */
+                min-height: 60px; 
             }
         }
 
@@ -959,8 +969,7 @@
             }
         }
         
-    </style>
-</head>
+    </style></head>
 <body>
 
     <div class="preloader" id="preloader">
@@ -1257,7 +1266,7 @@
             
             // --- THIS IS THE LINE TO CHANGE ---
             // Set how long the loading screen stays visible (in milliseconds)
-            const loadingScreenTime = 2000; // 1000 = 1 second
+            const loadingScreenTime = 3000; // 1000 = 1 second
             // ------------------------------------
 
             // This should match your CSS fade-out time
